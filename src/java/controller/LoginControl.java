@@ -39,7 +39,7 @@ public class LoginControl extends HttpServlet {
         DAO dao = new DAO();
         Accounts a = dao.login(username, password);
         if (a == null) {
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("login").forward(request, response);
             request.setAttribute("mess", "Wrong username or password");
         } else {
             response.sendRedirect("home");

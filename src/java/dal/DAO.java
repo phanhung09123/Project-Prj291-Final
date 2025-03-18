@@ -17,6 +17,7 @@ import model.Accounts;
 import dal.DBContext;
 import java.sql.Statement;
 import java.sql.Types;
+import model.Product;
 
 /**
  *
@@ -487,6 +488,33 @@ public class DAO {
             }
         }
     }
+    
+    public Product getProduct(int id) {
+        Product product = null;
+        String sql = "SELECT * FROM Product WHERE product_id = ?";
+        try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    product = new Product();
+                    product.setProductId(rs.getInt("product_id"));
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getBigDecimal("price"));
+                    product.setStockQuantity(rs.getInt("stock_quantity"));
+                    product.setDescription(rs.getString("description"));
+                    product.setCountry(rs.getString("country"));
+                    product.setYear(rs.getInt("year"));
+                    product.setImageUrl(rs.getString("image_url"));
+                    product.setQuantity(rs.getInt("quantity")); // This will be 0 by default.
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+    
 
 //    public static void main(String[] args) {
 //        DAO dao = new DAO();

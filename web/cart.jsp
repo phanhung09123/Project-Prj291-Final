@@ -72,7 +72,11 @@
             .cart-actions a:hover {
                 background-color: #218838;
             }
-
+            
+            .footer {
+                position: fixed;
+                bottom: 0;
+            }
         </style>
     </head>
     <body>
@@ -182,7 +186,8 @@
 
 
             <!-- Include Footer -->
-            <jsp:include page="Footer.jsp"></jsp:include>
+            
         </div>
+            <jsp:include page="Footer.jsp"></jsp:include>
     </body>
 </html>

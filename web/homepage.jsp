@@ -1,21 +1,29 @@
+<%-- 
+    Document   : homepage
+    Created on : Mar 18, 2025, 1:38:19 PM
+    Author     : phanh
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/homepagestyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <title>LCD Web Store</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../elements/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../elements/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../elements/favicon/favicon-16x16.png">
-    <link rel="manifest" href="../elements/favicon/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="elements/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="elements/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="elements/favicon/favicon-16x16.png">
+    <link rel="manifest" href="elements/favicon/site.webmanifest">
 </head>
 <body class="container-fluid">
     <header class="row">
         <div class="col-md-2 logo">
-            <a href="HomePage.html"><img src="../elements/home_logo.png" alt="Home Logo"></a> <!-- Wrap logo in a link -->
+            <a href="homepage.jsp"><img src="elements/logo/home_logo.png" alt="Home Logo"></a> <!-- Wrap logo in a link -->
         </div>
         
         <div class="col-md-4">
@@ -24,7 +32,7 @@
 
         <nav class="col-md-6 navigate">
             <a href="#">search</a>
-            <a href="#">explore</a>
+            <a href="/home">explore</a>
             <a href="#">about</a> <!-- Update link to jump to about section -->
             <a href="Login.html">account</a>
             <a href="#">cart</a>
@@ -34,10 +42,10 @@
     <main>
         <section class="poster-slider">
             <div class="poster">
-                <img src="../elements/banner-ctkm-champagne.jpg" alt="Poster 1">
+                <img src="elements/banner/banner-ctkm-champagne.jpg" alt="Poster 1">
             </div>
             <div class="poster">
-                <img src="../elements/banner-vang-hong-8-3.jpg" alt="Poster 2">
+                <img src="elements/banner/banner-vang-hong-8-3.jpg" alt="Poster 2">
             </div>
             <!-- Add more posters as needed -->
         </section>
