@@ -6,9 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<footer class="footer" style="            .footer {
-                position: fixed;
-                bottom: 0
-            }">
+<footer class="footer container-fluid" style="position: fixed; bottom: 0; width: 100%">
     <p>&copy; 2025 Wine Shop. All rights reserved.</p>
 </footer>

@@ -32,7 +32,7 @@
 
         <nav class="col-md-6 navigate">
             <a href="#">search</a>
-            <a href="/home">explore</a>
+            <a href="${pageContext.request.contextPath}/home"">explore</a>
             <a href="#">about</a> <!-- Update link to jump to about section -->
             <a href="Login.html">account</a>
             <a href="#">cart</a>

@@ -62,6 +62,7 @@
         footer {
             text-align: center;
         }
+        
     </style>
 </head>
 <body>
@@ -99,6 +100,6 @@
     </div>
     
     <!-- Include Footer -->
-    <jsp:include page="Footer.jsp"></jsp:include>
 </body>
+    <jsp:include page="Footer.jsp"></jsp:include>
 </html>

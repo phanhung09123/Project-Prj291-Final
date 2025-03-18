@@ -21,8 +21,8 @@
     <title>Menu Header</title>
 </head>
 
-<body class="container-fluid">
-    <header class="header row">
+<body class="container-fluid " style="padding-left: 0">
+    <header class="header row" style="padding: 0">
         <div class="col-md-1"></div>
         <div class="col-md-2 logo">
             <a href="homepage.jsp"><img src="elements/logo/Logo-menu.png" alt="Home Logo"></a>

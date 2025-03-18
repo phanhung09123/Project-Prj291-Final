@@ -73,10 +73,6 @@
                 background-color: #218838;
             }
             
-            .footer {
-                position: fixed;
-                bottom: 0;
-            }
         </style>
     </head>
     <body>
