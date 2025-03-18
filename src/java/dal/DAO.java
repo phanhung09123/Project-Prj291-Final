@@ -364,8 +364,8 @@ public class DAO {
 //Added by HungCuong
     
 
-    public Accounts login(String username, String password) {
-        String query = "select * from Accounts\n"
+    public Customers login(String username, String password) {
+        String query = "select * from Customers\n"
                 + "where email = ?\n"
                 + "and password_hash = ?";
         try {
@@ -378,11 +378,13 @@ public class DAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 System.out.println("Login successful for username: " + username);
-                return new Accounts(rs.getInt(1),
+                return new Customers(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getDate(5));
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDate(7));
             }
             System.out.println("Login failed for username: " + username);
         } catch (SQLException e) {
@@ -407,8 +409,8 @@ public class DAO {
         return null;
     }
 
-    public Accounts checkAccountExists(String username) {
-        String query = "select * from Accounts\n"
+    public Customers checkAccountExists(String username) {
+        String query = "select * from Customers\n"
                 + "where email = ?";
         try {
             System.out.println("Checking if account exists for username: " + username);
@@ -418,11 +420,13 @@ public class DAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 System.out.println("Account found for username: " + username);
-                return new Accounts(rs.getInt(1),
+                return new Customers(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getDate(5));
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDate(7));
             }
             System.out.println("No account found for username: " + username);
         } catch (SQLException e) {
@@ -447,37 +451,25 @@ public class DAO {
     }
 
     public void register(String username, String password, String telephone) {
-        String Accquery = "INSERT INTO Accounts (email, password_hash, phone, created_at)\n"
-                + "VALUES (?, ?, ?, GETDATE());";
-        String Cusquery = "INSERT INTO Customers (email, password_hash, phone, created_at)\n"
-                + "VALUES (?, ?, ?, GETDATE());";
-        PreparedStatement ps1 = null;
-        PreparedStatement ps2 = null;
+        String Cusquery = "insert into Customers ([name], email, password_hash, phone, created_at)\n" +
+                          "values ('unknown', ?, ?, ?, getdate());";
         try {
             System.out.println("Connecting to database...");
             conn = DBContext.getConnection();
-            ps1 = conn.prepareStatement(Accquery);
-            ps2 = conn.prepareStatement(Cusquery);
-            ps1.setString(1, username);
-            ps1.setString(2, password);
-            ps1.setString(3, telephone);
-            ps2.setString(1, username);
-            ps2.setString(2, password);
-            ps2.setString(3, telephone);
+            ps = conn.prepareStatement(Cusquery);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, telephone);
             System.out.println("Executing query: " + ps);
-            ps1.executeUpdate();
-            ps2.executeUpdate();
+            ps.executeUpdate();
             System.out.println("User registered successfully.");
         } catch (SQLException e) {
             System.out.println("Error during registration: " + e.getMessage());
             e.printStackTrace();
         } finally {
             try {
-                if (ps1 != null) {
-                    ps1.close();
-                }
-                if (ps2 != null) {
-                    ps2.close();
+                if (ps != null) {
+                    ps.close();
                 }
                 if (conn != null) {
                     conn.close();

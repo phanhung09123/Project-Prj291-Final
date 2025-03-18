@@ -39,11 +39,11 @@ public class RegisterControl extends HttpServlet {
         String password = request.getParameter("pass");
         String re_pass = request.getParameter("re-pass");
         if(!password.equals(re_pass)){
-            response.sendRedirect("login");
+            response.sendRedirect("register");
         }else{
             DAO dao = new DAO();
-            Accounts a = dao.checkAccountExists(username);
-            if(a == null){
+            Customers c = dao.checkAccountExists(username);
+            if(c == null){
                 dao.register(username,password,telephone);
                 response.sendRedirect("login");
             }else{

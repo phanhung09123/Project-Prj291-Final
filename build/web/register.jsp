@@ -34,17 +34,17 @@
             <h2 class="text-center">register.</h2>
             <form id="registerForm" action="register" method="POST">
                 <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Email Address" required>
+                    <input type="email" class="form-control" placeholder="Email Address" name="user" required>
                 </div>
                 <div class="mb-3">
-                    <input type="tel" class="form-control" placeholder="Phone Number" required>
+                    <input type="tel" class="form-control" placeholder="Phone Number" name="phone" required>
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" placeholder="Password" required>
+                    <input type="password" class="form-control" placeholder="Password" name="pass" required>
                 </div>
                 <div class="mb-3">
                     
-                    <input type="password" class="form-control" placeholder="Confirm Password" required>
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="re-pass" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">register</button>
             </form>

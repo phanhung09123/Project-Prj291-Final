@@ -35,7 +35,7 @@
             <h2 class="text-center2">${mess}</h2>
             <form id="loginForm" action="login" method="POST">
                 <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Email Address" name="email" required>
+                    <input type="email" class="form-control" placeholder="Email Address" name="user" required>
                 </div>
                 <div class="mb-3">
                     <input type="password" class="form-control" placeholder="Password" name="pass" required>

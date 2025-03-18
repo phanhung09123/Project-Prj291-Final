@@ -1,18 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import dal.DAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Accounts;
 import model.Customers;
 
 /**
@@ -37,10 +31,10 @@ public class LoginControl extends HttpServlet {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
         DAO dao = new DAO();
-        Accounts a = dao.login(username, password);
-        if (a == null) {
-            request.getRequestDispatcher("login").forward(request, response);
+        Customers c = dao.login(username, password);
+        if (c == null) {
             request.setAttribute("mess", "Wrong username or password");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             response.sendRedirect("home");
         }
