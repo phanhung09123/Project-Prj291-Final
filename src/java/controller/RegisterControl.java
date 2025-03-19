@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashSet;
+import java.util.Set;
 import model.Accounts;
 import model.Customers;
 
@@ -38,31 +40,33 @@ public class RegisterControl extends HttpServlet {
         String telephone = request.getParameter("phone");
         String password = request.getParameter("pass");
         String re_pass = request.getParameter("re-pass");
-        if(!password.equals(re_pass)){
-            response.sendRedirect("register");
-        }else{
+        if (!password.equals(re_pass)) {
+            request.setAttribute("mess", "The passwords in the 2 fields should be the same!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        } else {
             DAO dao = new DAO();
             Customers c = dao.checkAccountExists(username);
-            if(c == null){
-                dao.register(username,password,telephone);
-                response.sendRedirect("login");
-            }else{
-                response.sendRedirect("login");
+            if (c == null) {
+                dao.register(username, password, telephone);
+                response.sendRedirect("login.jsp");
+            } else {
+                request.setAttribute("mess", "Account already existed!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }
-}
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -76,7 +80,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
      * @throws IOException if an I/O error occurs
      */
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -87,7 +91,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * @return a String containing servlet description
      */
     @Override
-public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

@@ -36,7 +36,7 @@ public class LoginControl extends HttpServlet {
             request.setAttribute("mess", "Wrong username or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            response.sendRedirect("home");
+            response.sendRedirect("homepage.jsp");
         }
 
     }

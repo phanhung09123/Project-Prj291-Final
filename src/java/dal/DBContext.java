@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBContext {
-    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=WineShop2";
+    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=WineShop2;encrypt=true;trustServerCertificate=true;";
     private static final String USERNAME = "sa";           // Update with your username
-    private static final String PASSWORD = "12345";  // Update with your password
+    private static final String PASSWORD = "123456";  // Update with your password
 
     public static Connection getConnection() throws SQLException {
         try {
@@ -32,8 +32,8 @@ public class DBContext {
     private final String dbName = "WineShop2";
     private final String portNumber = "9999";
     private final String instance = "";
-    private final String userID = "sa";
-    private final String password = "12345";
+    private final String userID = "admin";
+    private final String password = "123";
 
     public static void main(String[] args) {
         if (testConnection()) {
