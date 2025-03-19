@@ -174,7 +174,7 @@
                     </tbody>
                 </table>
                 <h4>Total: <%= String.format("%.2f", totalPrice) %> $</h4>
-                <form action="${pageContext.request.contextPath}/checkout" method="post">
+                <form action="${pageContext.request.contextPath}/checkout.jsp" method="post">
                     <button type="submit">Proceed to Checkout</button>
                 </form>
                 <p><button><a class="continue-shopping" href="${pageContext.request.contextPath}/home">Continue Shopping</a></button></p>

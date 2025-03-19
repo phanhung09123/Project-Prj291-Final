@@ -1,0 +1,45 @@
+@font-face {
+    font-family: PlayFair;
+    src: url('../elements/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Agrandir;
+    src: url('../elements/Agrandir-WideBold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: AgrandirNormal;
+    src: url('../elements/Agrandir-Bold.otf') format('opentype');
+}
+
+.footer .contact_info p::before {
+    content: ""; /* Remove bullet point */
+}
+
+.footer a {
+    color: #d7a9a8;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer .title_contact h3 {
+    font-family: AgrandirNormal;
+    font-size: 2m;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+
+
+.footer .contact_info p::before {
+    content: ""; /* Remove bullet point */
+}
+
+.footer{
+    background-color: #7e102c;
+    padding-top:2vh;
+}

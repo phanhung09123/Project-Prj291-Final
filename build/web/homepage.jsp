@@ -64,7 +64,7 @@
                 
             </div>
             <button class="start_explore">
-                <a href="#">start exploring</a>
+                <a href="home">start exploring</a>
             </button>
         </section>
 

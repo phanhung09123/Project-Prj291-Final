@@ -61,6 +61,7 @@
         /* Footer */
         footer {
             text-align: center;
+            padding:0;
         }
         
     </style>
@@ -81,7 +82,7 @@
             <h2>Products</h2>
             <c:forEach var="o" items="${listP}">
                 <div class="ouct-card">
-                    <img src="" alt="${o.name}" />
+                    <img src="${o.image_url}" alt="${o.name}" />
                     <h4 class="card-title show_txt">
                         <a href="detail?wine_id=${o.wine_id}" title="view product">${o.name}</a>
                     </h4>
