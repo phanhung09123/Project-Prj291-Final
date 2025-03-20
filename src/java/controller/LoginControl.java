@@ -38,7 +38,7 @@ public class LoginControl extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("user", username);
+            session.setAttribute("user", c);
             response.sendRedirect("homepage.jsp");
         }
 
