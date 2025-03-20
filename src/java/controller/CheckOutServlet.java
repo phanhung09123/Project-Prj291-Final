@@ -1,83 +1,101 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller;
-
+import dal.DAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.OrderItem;
+import model.Product;
 
-/**
- *
- * @author Unknown00
- */
-@WebServlet(name="CheckOutServlet", urlPatterns={"/checkout"})
-public class CheckOutServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CheckOutServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CheckOutServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
+@WebServlet("/checkout")
+public class CheckoutServlet extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        DAO dao = new DAO();
+
+        // Retrieve the cart cookie (format: "wineId-quantity,wineId-quantity,...")
+        Cookie[] cookies = request.getCookies();
+        String cartData = "";
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("cart".equals(cookie.getName())) {
+                    cartData = URLDecoder.decode(cookie.getValue(), "UTF-8");
+                    break;
+                }
+            }
+        }
+
+        // If the cart is empty, redirect back to cart.jsp.
+        if (cartData == null || cartData.trim().isEmpty()) {
+            response.sendRedirect("cart.jsp");
+            return;
+        }
+
+        // Retrieve customer ID from session (if logged in) or remain null for guest checkout.
+        Integer customerId = (Integer) request.getSession().getAttribute("customerId");
+
+        // Parse the cart data into a list of OrderItem objects and compute the total price using double.
+        List<OrderItem> orderItems = new ArrayList<>();
+        double totalPrice = 0.0;
+        String[] items = cartData.split(",");
+        for (String item : items) {
+            if (item != null && !item.trim().isEmpty()) {
+                // Each item is expected to be in the format "wineId-quantity"
+                String[] parts = item.split("-");
+                if (parts.length == 2) {
+                    try {
+                        int wineId = Integer.parseInt(parts[0].trim());
+                        int quantity = Integer.parseInt(parts[1].trim());
+
+                        // Retrieve product details from the database.
+                        Product p = dao.getProduct(wineId);
+                        if (p != null && quantity > 0) {
+                            double unitPrice = p.getPrice().doubleValue();
+                            totalPrice += unitPrice * quantity;
+
+                            // Add this item to our order items list.
+                            orderItems.add(new OrderItem(wineId, quantity, unitPrice));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.err.println("Invalid cart item format: " + item);
+                    }
+                } else {
+                    System.err.println("Invalid cart item format: " + item);
+                }
+            }
+        }
+
+        // Create a new order in the Orders table.
+        int orderId = dao.createOrder(customerId, totalPrice);
+
+        // Insert each order item into the OrderDetails table (including customerId).
+        for (OrderItem oi : orderItems) {
+            //dao.addOrderDetail(orderId, customerId, oi.getWineId(), oi.getQuantity(), oi.getUnitPrice());
+            dao.addOrderDetail(orderId, customerId, oi.getWineId(), oi.getQuantity(), oi.getUnitPrice());
+        }
+        
+        
+
+        // Clear the cart cookie.
+        Cookie clearCart = new Cookie("cart", "");
+        clearCart.setMaxAge(0);
+        clearCart.setPath("/");
+        response.addCookie(clearCart);
+
+        // Redirect to an order confirmation page.
+        request.setAttribute("orderId", orderId);
+        request.setAttribute("totalPrice", totalPrice);  // totalPrice as a double
+        response.sendRedirect(request.getContextPath() + "/checkout.jsp?orderId=" + orderId + "&totalPrice=" + totalPrice);
+
     }
-
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

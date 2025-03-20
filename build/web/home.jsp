@@ -40,6 +40,12 @@
                             <p>
                                 <fmt:formatNumber value="${o.price}" type="currency"/>
                             </p>
+                            <form action="cart" method="post">
+                                <!-- Assuming the wine id is available as detail.wine_id -->
+                                <input type="hidden" name="id" value="${o.wine_id}" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button type="submit" class="add-to-cart">Add to Cart</button>
+                            </form>
                         </div>
                     </a>
                 </c:forEach>

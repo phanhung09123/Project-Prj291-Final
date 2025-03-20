@@ -33,7 +33,7 @@ public class AddControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int wines_id = Integer.parseInt("wid");
+        int wines_id = Integer.parseInt("wine_id");
         String name = request.getParameter("name");
         String type = request.getParameter("type");
         String country = request.getParameter("country");

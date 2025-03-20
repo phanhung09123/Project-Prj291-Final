@@ -25,11 +25,11 @@
         </div>
 
         <nav class="col-md-6 navigate">
-            <a href="#">search</a>
+            <a href="${pageContext.request.contextPath}/search">search</a>
             <a href="${pageContext.request.contextPath}/home"">explore</a>
             <a href="#">about</a> <!-- Update link to jump to about section -->
-            <a href="Login.html">account</a>
-            <a href="#">cart</a>
+            <a href="login.jsp">account</a>
+            <a href="cart.jsp">cart</a>
         </nav>
     </header>
     

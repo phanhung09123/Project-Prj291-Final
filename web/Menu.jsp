@@ -34,8 +34,14 @@
 
         <div class="col-md-5">
             <nav class="navigate">
+                <div class="search-bar">
+                    <form action="search" method="get">
+                        <input type="text" name="txt" placeholder="Search wines...">
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
                 <a href="homepage.jsp">home</a>
-                <a href="search.jsp">search</a>
+                <a href="${pageContext.request.contextPath}/search}">search</a>
                 <a href="#about">about</a>
                 <a href="login.jsp">account</a>
                 <a href="cart.jsp">cart</a>
