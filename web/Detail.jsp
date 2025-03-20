@@ -17,7 +17,7 @@
     </head>
     <meta charset="UTF-8">
     <title>Wine Details</title>
-    
+
 </head>
 <body>
     <!-- Include the Menu/Header -->
@@ -44,12 +44,7 @@
             <p><strong>Description:</strong> ${detail.description}</p>
             <p><strong>Country:</strong> ${detail.country}</p>
             <p><strong>Year:</strong> ${detail.year}</p>
-                                        <form action="cart" method="post">
-                                <!-- Assuming the wine id is available as detail.wine_id -->
-                                <input type="hidden" name="id" value="${o.wine_id}" />
-                                <input type="hidden" name="quantity" value="1" />
-                                <button type="submit" class="add-to-cart">Add to Cart</button>
-                            </form>
+
         </div>
     </div>
 
