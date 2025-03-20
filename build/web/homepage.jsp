@@ -1,9 +1,3 @@
-<%-- 
-    Document   : homepage
-    Created on : Mar 18, 2025, 1:38:19 PM
-    Author     : phanh
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>

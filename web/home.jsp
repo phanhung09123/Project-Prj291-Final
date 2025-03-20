@@ -6,65 +6,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Wine Shop Home</title>
-    <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header, footer {
-            background-color: #333;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-        }
-        /* Container */
-        .container {
-            display: flex;
-            padding: 20px;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: #f4f4f4;
-            padding: 15px;
-        }
-        .sidebar h3 {
-            margin-top: 0;
-        }
-        .sidebar a {
-            display: block;
-            padding: 8px;
-            text-decoration: none;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .sidebar a.active {
-            background-color: #333;
-            color: #fff;
-        }
-        .main {
-            flex: 1;
-            padding: 15px;
-        }
-        /* Product Cards */
-        .ouct-card {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-        }
-        .ouct-card img {
-            max-width: 100%;
-            height: auto;
-        }
-        /* Footer */
-        footer {
-            text-align: center;
-            padding:0;
-        }
-        
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/home_menu.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <title>LCD Web Store</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="elements/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="elements/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="elements/favicon/favicon-16x16.png">
+    <link rel="manifest" href="elements/favicon/site.webmanifest">
 </head>
 <body>
     <!-- Include Header/Menu -->
@@ -79,24 +30,20 @@
         
         <!-- Main Content: Product Cards -->
         <div class="main">
-            <h2>Products</h2>
-            <c:forEach var="o" items="${listP}">
-                <div class="ouct-card">
-                    <img src="${o.image_url}" alt="${o.name}" />
-                    <h4 class="card-title show_txt">
-                        <a href="detail?wine_id=${o.wine_id}" title="view product">${o.name}</a>
-                    </h4>
-                    <p>${o.description}</p>
-                    <p>
-                        <strong>Price:</strong>
-                        <fmt:formatNumber value="${o.price}" type="currency"/>
-                    </p>
-                    <p>
-                        <strong>Country:</strong> ${o.country} |
-                        <strong>Year:</strong> ${o.year}
-                    </p>
-                </div>
-            </c:forEach>
+            <h2 class="product-title" >products</h2>
+            <div class="product-grid">
+                <c:forEach var="o" items="${listP}">
+                    <a href="detail?wine_id=${o.wine_id}" class="ouct-card">
+                        <div>
+                            <img src="${o.image_url}" alt="${o.name}" />
+                            <h4 class="card-title show_txt">${o.name}</h4>
+                            <p>
+                                <fmt:formatNumber value="${o.price}" type="currency"/>
+                            </p>
+                        </div>
+                    </a>
+                </c:forEach>
+            </div>
         </div>
     </div>
     

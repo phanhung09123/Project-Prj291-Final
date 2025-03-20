@@ -1,0 +1,103 @@
+@font-face {
+    font-family: PlayFair;
+    src: url('../elements/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Agrandir;
+    src: url('../elements/Agrandir-WideBold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: AgrandirNormal;
+    src: url('../elements/Agrandir-Bold.otf') format('opentype');
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header, footer {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+/* Container */
+.container {
+    display: flex;
+    padding: 20px;
+    margin-top: 50px; /* Add space between header and content */
+}
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 15px;
+}
+.sidebar h3 {
+    margin-top: 0;
+}
+.sidebar a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: #333;
+    margin-bottom: 5px;
+}
+.sidebar a.active {
+    background-color: #333;
+    color: #fff;
+}
+.main {
+    display: flexbox;
+    flex: 1;
+    padding: 15px;
+}
+/* Product Cards */
+.ouct-card {
+    position: relative; /* Enable positioning for child elements */
+    border: 2px solid red; /* Red border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px;
+    margin-bottom: 15px;
+    max-width: 20vw;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+.ouct-card p {
+    position: absolute; /* Position the price */
+    bottom: 10px; /* Align to the bottom */
+    left: 10px; /* Align to the left */
+    margin: 0; /* Remove default margin */
+    padding: 5px; /* Add padding around the price */
+}
+.ouct-card:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+.ouct-card img {
+    height: 250px;
+    width: 140px;
+    object-fit: cover;
+    margin-bottom: 10px; /* Add spacing below the image */
+}
+.ouct-card h4 {
+    margin-top: 10px; /* Ensure spacing above the name */
+    margin-bottom: 30px; /* Add spacing below the name */
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+/* Footer */
+footer {
+    text-align: center;
+    padding:0;
+}
+
+.product-title{
+    font-family: PlayFair;
+    font-size: 3em;
+}
