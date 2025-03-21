@@ -364,7 +364,7 @@ public class DAO {
 //Added by HungCuong
     
 
-    public Customers login(String username, String password) {
+    public Customers login(String email, String password) {
         String query = "select * from Customers\n"
                 + "where email = ?\n"
                 + "and password_hash = ?";
@@ -372,12 +372,12 @@ public class DAO {
             System.out.println("Connecting to database for login...");
             conn = DBContext.getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, username);
+            ps.setString(1, email);
             ps.setString(2, password);
             System.out.println("Executing query: " + ps);
             rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println("Login successful for username: " + username);
+                System.out.println("Login successful for user: " + email);
                 return new Customers(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -386,7 +386,7 @@ public class DAO {
                         rs.getString(6),
                         rs.getDate(7));
             }
-            System.out.println("Login failed for username: " + username);
+            System.out.println("Login failed for user: " + email);
         } catch (SQLException e) {
             System.out.println("SQL Exception during login: " + e.getMessage());
             e.printStackTrace();
@@ -409,17 +409,17 @@ public class DAO {
         return null;
     }
 
-    public Customers checkAccountExists(String username) {
+    public Customers checkAccountExists(String email) {
         String query = "select * from Customers\n"
                 + "where email = ?";
         try {
-            System.out.println("Checking if account exists for username: " + username);
+            System.out.println("Checking if account exists for user: " + email);
             conn = DBContext.getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, username);
+            ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println("Account found for username: " + username);
+                System.out.println("Account found for user: " + email);
                 return new Customers(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -428,7 +428,7 @@ public class DAO {
                         rs.getString(6),
                         rs.getDate(7));
             }
-            System.out.println("No account found for username: " + username);
+            System.out.println("No account found for user: " + email);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -450,16 +450,47 @@ public class DAO {
         return null;
     }
 
-    public void register(String username, String password, String telephone) {
+    public void register(String email, String password, String telephone) {
         String Cusquery = "insert into Customers ([name], email, password_hash, phone, created_at)\n" +
                           "values ('unknown', ?, ?, ?, getdate());";
         try {
             System.out.println("Connecting to database...");
             conn = DBContext.getConnection();
             ps = conn.prepareStatement(Cusquery);
-            ps.setString(1, username);
+            ps.setString(1, email);
             ps.setString(2, password);
             ps.setString(3, telephone);
+            System.out.println("Executing query: " + ps);
+            ps.executeUpdate();
+            System.out.println("User registered successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error during registration: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                // Handle closing errors
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+        public void registerGoogle(String name, String email, String password) {
+        String Cusquery = "insert into Customers ([name], email, password_hash, created_at)\n" +
+                          "values (?, ?, ?, getdate());";
+        try {
+            System.out.println("Connecting to database...");
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(Cusquery);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
             System.out.println("Executing query: " + ps);
             ps.executeUpdate();
             System.out.println("User registered successfully.");

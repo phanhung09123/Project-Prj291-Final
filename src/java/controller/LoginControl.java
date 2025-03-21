@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Customers;
+import model.GoogleAccount;
 
 /**
  *
@@ -17,6 +18,7 @@ import model.Customers;
 @WebServlet(name = "LoginControl", urlPatterns = {"/login"})
 public class LoginControl extends HttpServlet {
 
+        private final DAO dao = new DAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,12 +33,12 @@ public class LoginControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
-        DAO dao = new DAO();
         Customers c = dao.login(username, password);
         if (c == null) {
             request.setAttribute("mess", "Wrong username or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
+            c = dao.checkAccountExists(username);
             HttpSession session = request.getSession();
             session.setAttribute("user", c);
             response.sendRedirect("homepage.jsp");
@@ -56,7 +58,23 @@ public class LoginControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF=8");
+        String code = request.getParameter("code");
+        String accessToken = GoogleLogin.getToken(code);
+        GoogleAccount g = GoogleLogin.getUserInfo(accessToken);
+        System.out.println(g.toString());
+        Customers c = dao.checkAccountExists(g.getEmail());
+        if(c==null){
+            dao.registerGoogle(g.getGiven_name(), g.getEmail(), g.getId());
+            c = dao.checkAccountExists(g.getEmail());
+            HttpSession session = request.getSession();
+            session.setAttribute("user", c);
+            response.sendRedirect("homepage.jsp");
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", c);
+            response.sendRedirect("homepage.jsp");
+        }
     }
 
     /**

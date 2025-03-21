@@ -47,11 +47,7 @@
                     <a href="register.jsp" class="btn btn-link log-btn">register here</a>
                 </div>
                 <div class="flex-container">
-                    <a href="https://accounts.google.com/o/oauth2/auth?
-                       &client_id=709737879497-ga296lhh44fac2ti4n07qdpjb56cpjko.apps.googleusercontent.com                       
-                       &redirect_uri=http://localhost:9999/wines/login
-                       &response_type=code
-                       &scope=email%20profile%20openid" class="btn btn-link log-btn">Login with Google</a>
+                    <a href="https://accounts.google.com/o/oauth2/auth?client_id=709737879497-ga296lhh44fac2ti4n07qdpjb56cpjko.apps.googleusercontent.com&redirect_uri=http://localhost:9999/wines/login&response_type=code&scope=email%20profile%20openid" class="btn btn-link log-btn">Login with Google</a>
                 </div>
             </div>
         </main>
@@ -68,4 +64,4 @@
         </footer>
     </body>
 
-</html>
+</html
