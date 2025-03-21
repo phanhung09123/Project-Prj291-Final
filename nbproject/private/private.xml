@@ -4,11 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/controller/HomeControl.java</file>
+            <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/controller/AddControl.java</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/dal/DAO.java</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/controller/RegisterControl.java</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/dal/DBContext.java</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/controller/LoginControl.java</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/controller/EditControl.java</file>
+            <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/controller/LogoutControl.java</file>
+            <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/web/WinesManager.jsp</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/web/login.jsp</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/web/register.jsp</file>
             <file>file:/C:/Users/nvg/Documents/GitHub/Project-Prj291-Final/src/java/controller/ManagerControl.java</file>
